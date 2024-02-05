@@ -1,13 +1,11 @@
 import java.sql.SQLException;
-import java.nio.file.Files;
-
 import java.io.File;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        String FileName = "DevicesDB.sqlite";
-        if (!(new File(FileName).exists())) {
-            var db = new CreateDB(FileName);
+        String dbName = "DevicesDB.sqlite";
+        if (!(new File(dbName).exists())) {
+            var db = new CreateDB(dbName);
             db.Create();
         }
 
@@ -16,7 +14,7 @@ public class Main {
                        "INNER JOIN Manufacturer ON Manufacturer.Id=Devices.ManufacturerId " +
                        "INNER JOIN Info ON Info.Id=Devices.InfoId;";
 
-        var result = new GetData(FileName);
+        var result = new GetData(dbName);
         result.PrintDataTable(query);
     }
 }

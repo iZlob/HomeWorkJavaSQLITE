@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class GetData {
+public class GetData implements AutoCloseable {
     private Connection _connection;
     private Statement _statement;
 
@@ -51,5 +51,10 @@ public class GetData {
         }
 
         return newPrice.toString();
+    }
+
+    @Override
+    public void close() throws Exception {
+        _connection.close();
     }
 }
